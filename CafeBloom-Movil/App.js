@@ -1,20 +1,50 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, View } from 'react-native';
+
+import LoginScreen from './Screens/LoginScreen';
+import DashboardCocina from './Screens/Cocina/DashboardCocina';
 
 export default function App() {
+  const [pantallaActual, setPantallaActual] = useState("login");
+
+  const renderPantalla = () => {
+    switch (pantallaActual) {
+      case "login":
+        return <LoginScreen cambiarPantalla={setPantallaActual} />;
+
+      case "dashboardCocina":
+        return <DashboardCocina />;
+
+      case "dashboardMesero":
+        return (
+          <View style={styles.container}>
+            {/* aquí luego metes Mesero */}
+          </View>
+        );
+
+      case "dashboardCaja":
+        return (
+          <View style={styles.container}>
+            {/* aquí luego metes Caja */}
+          </View>
+        );
+
+      default:
+        return <LoginScreen cambiarPantalla={setPantallaActual} />;
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <>
+      {renderPantalla()}
       <StatusBar style="auto" />
-    </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
