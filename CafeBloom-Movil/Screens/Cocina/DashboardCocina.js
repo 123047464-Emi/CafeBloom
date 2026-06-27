@@ -8,66 +8,69 @@ import {
 } from "react-native";
 import theme from "../../theme";
 
-
 import TarjetaEstadistica from "../../Components/Cocina/TarjetaEstadistica";
 import TarjetaNavegacion from "../../Components/Cocina/TarjetaNavegacion";
 
+import {
+  estadisticas,
+  modulosDashboard,
+} from "../../data/datosMockCocina";
 
-import{estadisticas, modulosDashboard,} from "../../data/datosMockCocina";
+export default function DashboardCocina() {
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        
+        {/* Encabezado */}
+        <View style={styles.encabezado}>
+          <Text style={styles.titulo}>Cocina</Text>
+          <Text style={styles.subtitulo}>
+            Gestión de pedidos e inventario
+          </Text>
+        </View>
 
+        {/* Estadísticas */}
+        <View style={styles.seccion}>
+          <Text style={styles.tituloSeccion}>
+            Resumen del día
+          </Text>
 
-//Definimos la pantalla principal
-export default function DashboardCocina(){
-    return(
-        <SafeAreaView style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false}
-            >
-            {/*Cuerpo de la pantalla */}
-            <View style={styles.encabezado}>
-                <Text style={styles.title}> Cocina
-                </Text>
-                <Text style={styles.subtitulo}>
-                    Gestión de pedidos e inventario
-                </Text>
-            </View>
-            {/*Estadisticas*/}
-            <View style={styles.seccion}>
-                <Text style={styles.tituloSeccion}>
-                    Resumen del dia
-                </Text>
-                <View style={styles.filasEstadisticas}>
-                    <TarjetaEstadistica
-                        titulo="Activo"
-                        valor={estadisticas.activos}
-                    />
-                    <TarjetaEstadistica
-                        titulo="Preparando"
-                        valor={estadisticas.preparando}
-                    />
-                    <TarjetaEstadistica
-                        titulo="Listos"
-                        valor={estadisticas.listos}
-                    />
-                </View>
-            </View>
-            {/*Modulos */}
-            <View style={styles.seccion}>
-                <Text style={styles.tituloSeccion}>
-                    Módulos Principales
-                </Text>
-                {modulosDashboard.map((modulo)=>(
-                    <TarjetaNavegacion
-                    key={modulo.id}
-                    titulo={modulo.titulo}
-                    descripcion={modulo.descripcion}
-                    textoBoton={modulo.textoBoton}
-                    pantalla={modulo.pantalla}
-                    />
-                ))}
-            </View>
-            </ScrollView>
-        </SafeAreaView>
-    )
+          <View style={styles.filaEstadisticas}>
+            <TarjetaEstadistica
+              titulo="Activo"
+              valor={estadisticas.activos}
+            />
+            <TarjetaEstadistica
+              titulo="Preparando"
+              valor={estadisticas.preparando}
+            />
+            <TarjetaEstadistica
+              titulo="Listos"
+              valor={estadisticas.listos}
+            />
+          </View>
+        </View>
+
+        {/* Módulos */}
+        <View style={styles.seccion}>
+          <Text style={styles.tituloSeccion}>
+            Módulos Principales
+          </Text>
+
+          {modulosDashboard.map((modulo) => (
+            <TarjetaNavegacion
+              key={modulo.id}
+              titulo={modulo.titulo}
+              descripcion={modulo.descripcion}
+              textoBoton={modulo.textoBoton}
+              pantalla={modulo.pantalla}
+            />
+          ))}
+        </View>
+
+      </ScrollView>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -79,7 +82,7 @@ const styles = StyleSheet.create({
 
   encabezado: {
     alignItems: "center",
-    marginTop: theme.spacing.lg,
+    marginTop: 50, 
     marginBottom: theme.spacing.xl,
   },
 
@@ -111,6 +114,6 @@ const styles = StyleSheet.create({
 
   filaEstadisticas: {
     flexDirection: "row",
-    gap: theme.spacing.sm,
+    justifyContent: "space-between",
   },
 });

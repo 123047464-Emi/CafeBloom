@@ -29,7 +29,7 @@ export default function LoginScreen({ cambiarPantalla }) {
   const [password, setPassword] = useState("");
   const [selectRol, setSelectRol] = useState("Cocina");
 
-  // 🔥 credenciales por rol (YA COMPLETO)
+  // credenciales por rol 
   const credenciales = {
     Mesero: {
       email: "mesero@cafebloom.com",
@@ -62,7 +62,7 @@ export default function LoginScreen({ cambiarPantalla }) {
     ) {
       Alert.alert("Bienvenido", `Acceso concedido como ${selectRol}`);
 
-      // 🔥 navegación según rol
+      //  navegación según rol
       if (selectRol === "Cocina") {
         cambiarPantalla("dashboardCocina");
       } else if (selectRol === "Mesero") {

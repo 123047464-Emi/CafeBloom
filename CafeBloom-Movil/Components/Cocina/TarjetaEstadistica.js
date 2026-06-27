@@ -1,19 +1,14 @@
 import React from "react";
-import {View, Text, StyleSheet} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import theme from "../../theme";
 
-
-
-export default function TarjetaEstadistica({
-    titulo,
-    valor,
-}){
-    return(
-        <View style={styles.card}>
-            <Text style={styles.valor}>{valor}</Text>
-            <Text style={styles.titulo}>{titulo}</Text>
-        </View>
-    );
+export default function TarjetaEstadistica({ titulo, valor }) {
+  return (
+    <View style={styles.card}>
+      <Text style={styles.valor}>{valor}</Text>
+      <Text style={styles.titulo}>{titulo}</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -25,6 +20,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: theme.colors.border,
     alignItems: "center",
+
+    marginHorizontal: 4,
   },
 
   valor: {
