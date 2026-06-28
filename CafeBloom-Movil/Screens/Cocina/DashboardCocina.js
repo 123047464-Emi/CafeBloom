@@ -1,22 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
   View,
   Text,
   StyleSheet,
+  Alert,
 } from "react-native";
+
 import theme from "../../theme";
 
 import TarjetaEstadistica from "../../Components/Cocina/TarjetaEstadistica";
 import TarjetaNavegacion from "../../Components/Cocina/TarjetaNavegacion";
 
-import {
-  estadisticas,
-  modulosDashboard,
-} from "../../data/datosMockCocina";
+import { modulosDashboard } from "../../data/datosMockCocina";
+import { getEstadisticas } from "../../services/CocinaService";
 
 export default function DashboardCocina() {
+
+  const [estadisticas, setEstadisticas] = useState({
+    activos: 0,
+    preparando: 0,
+    listos: 0,
+  });
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    cargarEstadisticas();
+  }, []);
+
+  const cargarEstadisticas = async () => {
+    try {
+      setLoading(true);
+
+      const data = await getEstadisticas();
+
+      setEstadisticas(data);
+
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
